@@ -1,9 +1,7 @@
-package org.firstinspires.ftc.teamcode.Controllers;
+package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+
 import com.bylazar.configurables.annotations.Configurable;
-import com.bylazar.telemetry.PanelsTelemetry;
-import com.bylazar.telemetry.TelemetryManager;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -11,8 +9,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Utils.Components.asmConfig;
-import org.firstinspires.ftc.teamcode.Utils.Components.asmServo;
 
 import dev.frozenmilk.dairy.cachinghardware.CachingDcMotorEx;
 
@@ -20,20 +16,9 @@ import dev.frozenmilk.dairy.cachinghardware.CachingDcMotorEx;
 public class ShooterController {
     private DcMotorEx shooterMotorLeft;
     private DcMotorEx shooterMotorRight;
-    private asmServo servor = null;
     private VoltageSensor voltageSensor;
 
-    public static double[] calibDistances = {50   ,60  ,70   ,80   ,90    ,100};
-    public static double[] calibRPMs =      {1050 ,1100,1110 ,1180 ,1260  , 1320};
-    public static double[] calibServoPos =  {0.2  ,0.4 ,0.5 ,0.5 , 0.54   , 0.54};
-
-    public static boolean useDistanceCompensation = true;
-
-    private double directionPos = 0.7;
-
-//    public static xdouble kS = 1.3;
     public static double kV = 0.0048;
-//    public static double kA = 0.0003;
 
     public static double kP = 0.025;
     public static double kI = 0.0;
@@ -45,36 +30,16 @@ public class ShooterController {
     private double lastVelocity = 0;
     private long lastTime = 0;
 
-    public static boolean isGraph = true;
-
-    private TelemetryPacket packet = new TelemetryPacket();
-
-    public static double servoClose = 0.7;
-    public static double servoLong = 0.7;
-
-    public enum ServosPos {
-        DIRECTION_DOWN(0.6),
-        DIRECTION_UP(0.3);
-
-        private final double position;
-        ServosPos(double pos) { this.position = pos; }
-        public double getPos() { return position; }
-    }
-
     public void initialize(HardwareMap hardwareMap, String shooterMotorLeftName,
-                           String shooterMotorRightName, String servoAngleRightName, double pos) {
+                           String shooterMotorRightName) {
         shooterMotorLeft = new CachingDcMotorEx(hardwareMap.get(DcMotorEx.class, shooterMotorLeftName));
         shooterMotorRight = new CachingDcMotorEx(hardwareMap.get(DcMotorEx.class, shooterMotorRightName));
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
-        servor = new asmServo("r_angle", hardwareMap,
-                asmConfig.angleMaxpos, asmConfig.angleMinpos,
-                servoClose, Servo.Direction.REVERSE);
-
         shooterMotorLeft.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         shooterMotorRight.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-        shooterMotorRight.setDirection(DcMotorEx.Direction.REVERSE);
-        shooterMotorLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        shooterMotorRight.setDirection(DcMotorEx.Direction.FORWARD);
+        shooterMotorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         lastTime = System.nanoTime();
     }
@@ -88,21 +53,6 @@ public class ShooterController {
         this.targetVelocityRPM = targetRPM;
     }
 
-    public void setDirectionPos(double setPos) {
-        directionPos = setPos;
-        powDirectionPos();
-    }
-
-    public void setParametersForDistance(double distance) {
-        if (!useDistanceCompensation) return;
-
-        double rpm = interpolate(calibDistances, calibRPMs, distance);
-        double servo = interpolate(calibDistances, calibServoPos, distance);
-
-        setShooterVelocity(rpm);
-        setDirectionPos(servo);
-    }
-
     private double interpolate(double[] xVals, double[] yVals, double x) {
         if (x <= xVals[0]) return yVals[0];
         if (x >= xVals[xVals.length-1]) return yVals[yVals.length-1];
@@ -114,10 +64,6 @@ public class ShooterController {
             }
         }
         return yVals[0];
-    }
-
-    public void powDirectionPos() {
-        servor.setPositionPerc(directionPos);
     }
 
     public void update() {
@@ -163,16 +109,6 @@ public class ShooterController {
         return Math.abs(currentVelocity - targetVelocityRPM) < tolerance;
     }
 
-    public void sendGraphData(PanelsTelemetry dashboard) {
-        double currentVelocity = Math.abs(-shooterMotorLeft.getVelocity());
-        double target = targetVelocityRPM;
-
-        TelemetryManager panelsTelemetry = dashboard.getTelemetry();
-        panelsTelemetry.addData("target",target);
-        panelsTelemetry.addData("current",currentVelocity);
-
-        panelsTelemetry.update();
-    }
 
     public double getCurrentVelocity(){
         return Math.abs(-shooterMotorLeft.getVelocity());

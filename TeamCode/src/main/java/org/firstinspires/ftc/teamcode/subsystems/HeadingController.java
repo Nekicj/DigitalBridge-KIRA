@@ -1,15 +1,13 @@
-package org.firstinspires.ftc.teamcode.Controllers;
+package org.firstinspires.ftc.teamcode.subsystems;
 
-import com.acmerobotics.dashboard.config.Config;
-import com.pedropathing.geometry.Pose;
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 
-@Config
+
 public class HeadingController {
     private GoBildaPinpointDriver pinpoint;
     private double currentHeadingRad = 0;
@@ -92,13 +90,13 @@ public class HeadingController {
         pinpoint.setPosY(Y, DistanceUnit.INCH);
     }
 
-    public void setPose(Pose newPose) {
-//        pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,newPose.getX(),newPose.getY(),AngleUnit.RADIANS,newPose.getHeading()));
-        pinpoint.setPosX(newPose.getX(), DistanceUnit.INCH);
-        pinpoint.setPosY(newPose.getY(), DistanceUnit.INCH);
-        pinpoint.setHeading(newPose.getHeading(), AngleUnit.RADIANS);
-
-    }
+//    public void setPose(Pose newPose) {
+////        pinpoint.setPosition(new Pose2D(DistanceUnit.INCH,newPose.getX(),newPose.getY(),AngleUnit.RADIANS,newPose.getHeading()));
+//        pinpoint.setPosX(newPose.getX(), DistanceUnit.INCH);
+//        pinpoint.setPosY(newPose.getY(), DistanceUnit.INCH);
+//        pinpoint.setHeading(newPose.getHeading(), AngleUnit.RADIANS);
+//
+//    }
 
     public void setHeading(double heading) {
         pinpoint.setHeading(heading, AngleUnit.RADIANS);

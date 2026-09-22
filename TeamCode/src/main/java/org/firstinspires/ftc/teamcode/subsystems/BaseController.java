@@ -2,21 +2,18 @@
  * @author David Tolegenov - 27674 Always Kiroshi
  */
 
-package org.firstinspires.ftc.teamcode.Controllers;
+package org.firstinspires.ftc.teamcode.subsystems;
 
-    import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-    import com.pedropathing.geometry.Pose;
-    import com.qualcomm.robotcore.hardware.DcMotor;
-    import com.qualcomm.robotcore.hardware.DcMotorEx;
-    import com.qualcomm.robotcore.hardware.DcMotorSimple;
-    import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-    import org.firstinspires.ftc.robotcore.external.Telemetry;
+import dev.frozenmilk.dairy.cachinghardware.CachingDcMotorEx;
 
-    import dev.frozenmilk.dairy.cachinghardware.CachingDcMotorEx;
 
-@Config
     public class BaseController {
     CachingDcMotorEx Lfront = null;
     CachingDcMotorEx Rfront = null;
@@ -35,8 +32,8 @@ package org.firstinspires.ftc.teamcode.Controllers;
 
             Lfront.setDirection(DcMotorSimple.Direction.FORWARD);
             Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
-            Lback.setDirection(DcMotorSimple.Direction.FORWARD);
-            Rback.setDirection(DcMotorSimple.Direction.REVERSE);
+            Lback.setDirection(DcMotorSimple.Direction.REVERSE);
+            Rback.setDirection(DcMotorSimple.Direction.FORWARD);
 
     //        Lfront.setRunMode(Motor.RunMode.VelocityControl);
     //        Rfront.setRunMode(Motor.RunMode.VelocityControl);
@@ -186,13 +183,13 @@ package org.firstinspires.ftc.teamcode.Controllers;
         public void resetPinpoint(){
             headingController.resetPinpoint();
         }
-
-        public double getDistanceTo(Pose comparedPose){
-            double dx = comparedPose.getX() - headingController.getPosX();
-            double dy = comparedPose.getY() - headingController.getPosY();
-
-            return Math.sqrt(dx * dx + dy * dy);
-        }
+//
+//        public double getDistanceTo(Pose comparedPose){
+//            double dx = comparedPose.getX() - headingController.getPosX();
+//            double dy = comparedPose.getY() - headingController.getPosY();
+//
+//            return Math.sqrt(dx * dx + dy * dy);
+//        }
 
         public void resetPinpointNSetPose(double X,double Y){
             double deltaHeading = headingController.getCurrentHeading();
@@ -201,10 +198,6 @@ package org.firstinspires.ftc.teamcode.Controllers;
             headingController.setPoseY(Y);
             headingController.setHeading(deltaHeading);
 
-        }
-
-        public void setPose(Pose pose){
-            headingController.setPose(pose);
         }
 
 
