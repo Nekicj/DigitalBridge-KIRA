@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.teamcode.utils;
+package org.firstinspires.ftc.teamcode.utils.auto;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
 
+import org.firstinspires.ftc.teamcode.utils.Alliance;
 
 
 public class FieldPositions {

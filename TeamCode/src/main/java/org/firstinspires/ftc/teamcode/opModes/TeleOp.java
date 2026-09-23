@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opMode;
+package org.firstinspires.ftc.teamcode.opModes;
 
 import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.controllers.BaseController;
 import org.firstinspires.ftc.teamcode.controllers.IntakeController;
 import org.firstinspires.ftc.teamcode.controllers.ShooterController;
 import org.firstinspires.ftc.teamcode.controllers.StopperController;
-import org.firstinspires.ftc.teamcode.utils.RobotConstants;
+import org.firstinspires.ftc.teamcode.RobotConstants;
 
 @Configurable
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "teleOp", group = "1")

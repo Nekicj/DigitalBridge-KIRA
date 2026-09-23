@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
-import org.firstinspires.ftc.teamcode.utils.RobotConstants;
+import org.firstinspires.ftc.teamcode.RobotConstants;
 
 import dev.frozenmilk.dairy.cachinghardware.CachingDcMotorEx;
 
