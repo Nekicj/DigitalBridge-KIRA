@@ -26,7 +26,6 @@ dependencies {
     implementation 'org.firstinspires.ftc:Hardware:12.0.0'
     implementation 'org.firstinspires.ftc:FtcCommon:12.0.0'
     implementation 'org.firstinspires.ftc:Vision:12.0.0'
-
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
 
@@ -48,10 +47,15 @@ dependencies {
 
 
     // =========================
-    // Panels + Configurables
-    // Sloth-compatible version
+    // Panels
     // =========================
 
     implementation 'com.bylazar.sloth:fullpanels:0.3.2+1.0.13'
+
+    // =========================
+    // SolversLib
+    // =========================
+    implementation "org.solverslib:core:0.3.6"
+    implementation "org.solverslib:pedroPathing:0.3.6"
 
 }

@@ -2,7 +2,7 @@
  * @author David Tolegenov - 27674 Always Kiroshi
  */
 
-package org.firstinspires.ftc.teamcode.subsystems;
+package org.firstinspires.ftc.teamcode.controllers;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -42,7 +42,7 @@ import dev.frozenmilk.dairy.cachinghardware.CachingDcMotorEx;
     //
     //        Lfront.setFeedforwardCoefficients(kS,kV,kA);
     //        Rfront.setFeedforwardCoefficients(kS,kV,kA);
-    //        Lback.setFeedforwardCoefficients(LBackkS,LBackkV,LBackkA);
+    //        Lback.setFeedforwardCoefficie nts(LBackkS,LBackkV,LBackkA);
     //        Rback.setFeedforwardCoefficients(kS,kV,kA);
     //
     //        Lfront.setVeloCoefficients(KP, KI, KD);

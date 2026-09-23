@@ -1,16 +1,15 @@
-package org.firstinspires.ftc.teamcode.subsystems;
+package org.firstinspires.ftc.teamcode.controllers;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+import org.firstinspires.ftc.teamcode.utils.RobotConstants;
 
 import dev.frozenmilk.dairy.cachinghardware.CachingDcMotorEx;
-import dev.frozenmilk.dairy.cachinghardware.CachingServo;
 
 
 public class IntakeController {
@@ -35,6 +34,22 @@ public class IntakeController {
     public void setIntakePower(double intakePower){
         intakeMotor.setPower(intakePower);
         intakeMotor2.setPower(intakePower);
+    }
+    public void stop(){
+        intakeMotor.setPower(0);
+        intakeMotor2.setPower(0);
+    }
+    public void intake(){
+        intakeMotor.setPower(-1);
+        intakeMotor2.setPower(-1);
+    }
+    public void outtake(){
+        intakeMotor.setPower(1);
+        intakeMotor2.setPower(1);
+    }
+    public void shooting(){
+        intakeMotor.setPower(-1 * RobotConstants.intakeShootingMultiplier);
+        intakeMotor2.setPower(-1 * RobotConstants.intakeShootingMultiplier);
     }
     public void update(){
     }

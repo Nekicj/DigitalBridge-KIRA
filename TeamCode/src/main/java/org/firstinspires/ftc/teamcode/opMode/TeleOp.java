@@ -4,10 +4,11 @@ import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.subsystems.BaseController;
-import org.firstinspires.ftc.teamcode.subsystems.IntakeController;
-import org.firstinspires.ftc.teamcode.subsystems.ShooterController;
-import org.firstinspires.ftc.teamcode.subsystems.StopperController;
+import org.firstinspires.ftc.teamcode.controllers.BaseController;
+import org.firstinspires.ftc.teamcode.controllers.IntakeController;
+import org.firstinspires.ftc.teamcode.controllers.ShooterController;
+import org.firstinspires.ftc.teamcode.controllers.StopperController;
+import org.firstinspires.ftc.teamcode.utils.RobotConstants;
 
 @Configurable
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "teleOp", group = "1")
@@ -21,9 +22,9 @@ public class TeleOp extends OpMode {
     private ElapsedTime stopperTimer = null;
 
     private boolean isShooting = false;
-    private boolean isStopper = false;
+    private boolean isStopper = true;
     private double intakePower = 0;
-    public static double shooterSpeed = 1430;
+    public static double shooterSpeed = RobotConstants.shooterSpeedBorder;
 
     @Override
     public void init(){
